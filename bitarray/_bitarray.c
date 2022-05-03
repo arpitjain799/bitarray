@@ -933,6 +933,12 @@ bitarray_copy(bitarrayobject *self)
     return res;
 }
 
+static PyObject *
+bitarray_copy_O(bitarrayobject *self, PyObject *ignored)
+{
+    return bitarray_copy(self);
+}
+
 PyDoc_STRVAR(copy_doc,
 "copy() -> bitarray\n\
 \n\
@@ -3192,7 +3198,7 @@ static PyMethodDef bitarray_methods[] = {
 
     {"__copy__",     (PyCFunction) bitarray_copy,        METH_NOARGS,
      copy_doc},
-    {"__deepcopy__", (PyCFunction) bitarray_copy,        METH_O,
+    {"__deepcopy__", (PyCFunction) bitarray_copy_O,      METH_O,
      copy_doc},
     {"__reduce__",   (PyCFunction) bitarray_reduce,      METH_NOARGS,
      reduce_doc},
