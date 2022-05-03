@@ -3301,6 +3301,7 @@ class FileTests(unittest.TestCase, Util):
             self.assertIsType(f, 'frozenbitarray')
             self.check_obj(f)
 
+    @unittest.skip("not on pyodide")
     def test_shelve(self):
         if hasattr(sys, 'gettotalrefcount'):
             return
@@ -3547,6 +3548,7 @@ class FileTests(unittest.TestCase, Util):
 
         self.assertEqual(self.read_file(), 1000 * b'\x55')
 
+    @unittest.skip("not on pyodide")
     def test_mmap_2(self):
         if not is_py3k:
             return
