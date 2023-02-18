@@ -3762,7 +3762,7 @@ class FileTests(unittest.TestCase, Util):
 
         self.assertEqual(self.read_file(), 1000 * b'\x33')
 
-    @skipIf(sys.version_info[0] == 2)
+    @skipIf(sys.version_info[0] == 2 or is_pypy)
     def test_mmap_readonly(self):
         with open(self.tmpfname, 'wb') as fo:
             fo.write(994 * b'\x89' + b'Veedon')
