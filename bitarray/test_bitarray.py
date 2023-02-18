@@ -1087,6 +1087,7 @@ class SliceTests(unittest.TestCase, Util):
         a[15:7:-1] = b
         self.assertEqual(a, bitarray('11111111 00000011 00000000'))
 
+    @skipIf(is_pypy)
     def test_setslice_self_shared_buffer_3(self):
         # Requires to check for (in setslice_bitarray()):
         #
