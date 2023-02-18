@@ -343,6 +343,7 @@ class CreateObjectTests(unittest.TestCase, Util):
         self.assertEQUAL(a, bitarray('00001111', 'little'))
         self.check_obj(a)
 
+    @skipIf(is_pypy)
     def test_buffer_writeable(self):
         a = bitarray(buffer=bytearray([65]))
         self.assertFalse(a.readonly)
@@ -4194,7 +4195,7 @@ class BufferImportTests(unittest.TestCase, Util):
         self.check_obj(a)
 
     # Python 2's array cannot be used as buffer
-    @skipIf(sys.version_info[0] == 2)
+    @skipIf(sys.version_info[0] == 2 or is_pypy)
     def test_array(self):
         a = array.array('B', [0, 255, 64])
         b = bitarray(None, 'little', a)
@@ -4243,6 +4244,7 @@ class BufferImportTests(unittest.TestCase, Util):
         self.check_obj(a)
         self.check_obj(b)
 
+    @skipIf(is_pypy)
     def test_bitarray_shared_sections(self):
         a = urandom(0x2000)
         b = bitarray(buffer=memoryview(a)[0x100:0x300])
@@ -4303,6 +4305,7 @@ class BufferImportTests(unittest.TestCase, Util):
                     set([1, 2, 3]),):
             self.assertRaises(TypeError, bitarray, buffer=arg)
 
+    @skipIf(is_pypy)
     def test_del_import_object(self):
         b = bytearray(100 * [0])
         a = bitarray(buffer=b)
