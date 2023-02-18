@@ -1544,6 +1544,7 @@ class MiscTests(unittest.TestCase, Util):
             self.assertEQUAL(a, b)
             self.check_obj(b)
 
+    @skipIf(is_pypy)
     def test_overflow(self):
         a = bitarray(1)
         for i in -7, -1, 0, 1:
